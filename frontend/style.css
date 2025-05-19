@@ -1,0 +1,350 @@
+:root {
+  --transition-speed: 1s;
+  --cream-beige: #F5E9D6; /* Background color for a soft, paper-like feel */
+  --warm-brown: #8B5E3C; /* For borders, titles, and sidebar elements */
+  --gray-blue: #6B8299; /* For interactive elements, adding a modern touch */
+  --off-white: #FDFDFD; /* For main content areas, ensuring clarity */
+  --soft-coral: #E89A8F; /* For subtle highlights, adding warmth */
+}
+
+body,
+button,
+li {
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+/* General styles */
+body {
+  font-family: sans-serif;
+  padding: 2rem;
+  background: var(--cream-beige);
+  color: var(--warm-brown);
+  margin: 0;
+}
+
+ul {
+  margin-top: 1rem;
+}
+
+li {
+  background: var(--off-white);
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--warm-brown);
+}
+
+li:hover {
+  background: var(--soft-coral);
+}
+
+/* Header styles */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--off-white);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--warm-brown);
+  z-index: 1000;
+}
+
+#site-title {
+  font-family: 'Sacramento', cursive;
+  font-size: 2.5rem;
+  margin: 0;
+  color: var(--warm-brown);
+}
+
+.header-buttons {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+}
+
+#toggleSidebar,
+#settingsBtn {
+  padding: 8px 12px;
+  cursor: pointer;
+  background: var(--gray-blue);
+  color: var(--off-white);
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+#toggleSidebar:hover,
+#settingsBtn:hover {
+  background: var(--soft-coral);
+  transform: scale(1.1);
+}
+
+/* Quill editor styles */
+#editor {
+  margin-bottom: 1rem;
+  max-width: 700px; /* Limit editor width */
+}
+
+.ql-editor {
+  background: var(--off-white);
+  color: var(--warm-brown);
+  border: 1px solid var(--warm-brown);
+  padding: 1rem;
+  min-height: 150px;
+  max-width: 100%;
+}
+
+.ql-toolbar {
+  background: var(--off-white);
+  border: 1px solid var(--warm-brown);
+  border-bottom: none;
+  max-width: 700px; /* Match editor width */
+}
+
+/* Container and content adjustments */
+.container {
+  display: flex;
+  margin-left: 250px;
+  margin-top: 80px; /* Offset for header */
+  transition: margin-left var(--transition-speed) ease;
+}
+
+.container.sidebar-hidden {
+  margin-left: 0;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 2rem;
+  background: var(--off-white);
+  border-radius: 10px;
+  border: 1px solid var(--warm-brown);
+  max-width: 700px; /* Limit content width */
+  margin: 0 auto; /* Center the content */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  padding: 1rem;
+  background: var(--off-white);
+  border-right: 1px solid var(--warm-brown);
+  height: 100vh;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform var(--transition-speed) ease;
+  z-index: 900;
+}
+
+.sidebar.sidebar-hidden {
+  transform: translateX(-100%);
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  color: var(--warm-brown);
+}
+
+/* Reload question button */
+#reloadQuestion {
+  padding: 8px 12px;
+  cursor: pointer;
+  background: var(--gray-blue);
+  color: var(--off-white);
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 1rem;
+  transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+#reloadQuestion:hover {
+  background: var(--soft-coral);
+  transform: scale(1.1);
+}
+
+/* Submit button */
+#submitBtn {
+  padding: 10px 20px;
+  cursor: pointer;
+  background: var(--gray-blue);
+  color: var(--off-white);
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+#submitBtn:hover {
+  background: var(--soft-coral);
+}
+
+/* Logout button in modal */
+.logout-btn {
+  padding: 10px 20px;
+  margin-top: 1rem;
+  cursor: pointer;
+  background: var(--gray-blue);
+  color: var(--off-white);
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.logout-btn:hover {
+  background: var(--soft-coral);
+}
+
+/* Login form */
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 2rem;
+  background: var(--off-white);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--warm-brown);
+}
+
+.login-container h2 {
+  margin: 0 0 1rem;
+  text-align: center;
+  color: var(--warm-brown);
+}
+
+.login-container input {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border: 1px solid var(--warm-brown);
+  border-radius: 5px;
+  background: var(--off-white);
+  color: var(--warm-brown);
+}
+
+.login-container button {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  background: var(--gray-blue);
+  color: var(--off-white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-container button:hover {
+  background: var(--soft-coral);
+}
+
+.login-container p {
+  text-align: center;
+  margin: 1rem 0 0;
+}
+
+.login-container a {
+  color: var(--warm-brown);
+  text-decoration: none;
+}
+
+.login-container a:hover {
+  color: var(--soft-coral);
+  text-decoration: underline;
+}
+
+/* Entry display */
+.entry-display {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: var(--cream-beige);
+  border-radius: 5px;
+  border: 1px solid var(--warm-brown);
+  white-space: pre-wrap;
+  overflow: auto;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: var(--off-white);
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  transform: translateY(-50px);
+  transition: transform var(--transition-speed) ease;
+  border: 1px solid var(--warm-brown);
+}
+
+.modal-content.active {
+  transform: translateY(0);
+}
+
+.modal-content h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  color: var(--warm-brown);
+}
+
+.modal-content h3 {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: var(--gray-blue);
+}
+
+.modal-content p {
+  margin: 0 0 0.5rem;
+  line-height: 1.5;
+  color: var(--warm-brown);
+}
+
+.modal-content button.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--gray-blue);
+  color: var(--off-white);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.modal-content button.close-modal:hover {
+  background: var(--soft-coral);
+}

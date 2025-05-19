@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mon Journal Quotidien</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Include Quill.js CSS from CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+  <!-- Load Sacramento font locally -->
+  <style>
+    @font-face {
+      font-family: 'Sacramento';
+      src: url('SacramentoRegular-X3LaG.ttf') format('truetype');
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="site-title">Mon-Journal</h1>
+    <div class="header-buttons">
+      <button id="toggleSidebar">←</button>
+      <button id="settingsBtn">⚙️</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Réponses</h2>
+      <ul id="history"></ul>
+    </aside>
+
+    <main class="content">
+      <h1 id="question">What's a new thing you learned recently?</h1>
+      <button id="reloadQuestion">♻️</button>
+      <!-- Quill editor with reduced height -->
+      <div id="editor" style="height: 150px;"></div>
+      <button id="submitBtn">Envoyer</button>
+      <div id="selectedEntry" class="entry-display"></div>
+    </main>
+  </div>
+
+  <!-- Include Quill.js JavaScript from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
