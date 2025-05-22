@@ -117,21 +117,6 @@ if (submitBtn) {
   console.error('submitBtn not found');
 }
 
-// Sidebar toggle
-const toggleSidebarButton = document.getElementById('toggleSidebar');
-const sidebar = document.querySelector('.sidebar');
-const container = document.querySelector('.container');
-if (toggleSidebarButton && sidebar && container) {
-  toggleSidebarButton.addEventListener('click', () => {
-    sidebar.classList.toggle('sidebar-hidden');
-    container.classList.toggle('sidebar-hidden');
-    toggleSidebarButton.classList.toggle('sidebar-hidden');
-    toggleSidebarButton.textContent = sidebar.classList.contains('sidebar-hidden') ? '→' : '←';
-  });
-} else {
-  console.error('toggleSidebar, sidebar, or container not found');
-}
-
 // Load random question
 async function loadRandomQuestion() {
   try {
@@ -213,13 +198,19 @@ async function loadEntries() {
     if (history) {
       history.innerHTML = '';
       data.forEach(entry => {
-        const li = document.createElement('li');
-        li.textContent = `${entry.date.split('T')[0]}: ${entry.question_text}`;
-        li.classList.add('entry-item');
-        li.style.cursor = 'pointer';
+        const noteDiv = document.createElement('div');
+        noteDiv.classList.add('note-item');
 
-        li.addEventListener('click', () => openModal(entry));
-        history.appendChild(li);
+        const questionHeader = document.createElement('h3');
+        questionHeader.textContent = entry.question_text;
+
+        const datePara = document.createElement('p');
+        datePara.textContent = entry.date.split('T')[0];
+
+        noteDiv.appendChild(questionHeader);
+        noteDiv.appendChild(datePara);
+        noteDiv.addEventListener('click', () => openModal(entry));
+        history.appendChild(noteDiv);
       });
     } else {
       console.error('history element not found');

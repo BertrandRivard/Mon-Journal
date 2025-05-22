@@ -18,24 +18,24 @@
   <header>
     <h1 id="site-title">Mon-Journal</h1>
     <div class="header-buttons">
-      <button id="toggleSidebar">←</button>
       <button id="settingsBtn">⚙️</button>
     </div>
   </header>
 
   <div class="container">
-    <aside class="sidebar">
-      <h2>Réponses</h2>
-      <ul id="history"></ul>
-    </aside>
-
-    <main class="content">
+    <main class="mainContent">
       <h1 id="question">What's a new thing you learned recently?</h1>
       <button id="reloadQuestion">♻️</button>
       <!-- Quill editor with reduced height -->
       <div id="editor" style="height: 150px;"></div>
       <button id="submitBtn">Envoyer</button>
-      <div id="selectedEntry" class="entry-display"></div>
+    </main>
+    <main class="pastcontent">
+      <!-- Section for previous notes -->
+      <section class="previous-notes">
+        <h2>Notes précédentes</h2>
+        <div id="history" class="notes-grid"></div>
+      </section>
     </main>
   </div>
 

@@ -9,8 +9,10 @@
 
 body,
 button,
-li {
+li,
+.note-item {
   transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  box-sizing: border-box; /* Include padding and border in width/height */
 }
 
 /* General styles */
@@ -20,22 +22,11 @@ body {
   background: var(--cream-beige);
   color: var(--warm-brown);
   margin: 0;
+  overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
 ul {
   margin-top: 1rem;
-}
-
-li {
-  background: var(--off-white);
-  margin: 0.5rem 0;
-  padding: 0.5rem;
-  border-radius: 5px;
-  border: 1px solid var(--warm-brown);
-}
-
-li:hover {
-  background: var(--soft-coral);
 }
 
 /* Header styles */
@@ -51,6 +42,7 @@ header {
   justify-content: space-between;
   border-bottom: 1px solid var(--warm-brown);
   z-index: 1000;
+  box-sizing: border-box; /* Ensure padding is included in width */
 }
 
 #site-title {
@@ -63,9 +55,9 @@ header {
 .header-buttons {
   display: flex;
   gap: 10px; /* Space between buttons */
+  margin-right: 20px; /* Ensure button doesn't go off-screen */
 }
 
-#toggleSidebar,
 #settingsBtn {
   padding: 8px 12px;
   cursor: pointer;
@@ -78,7 +70,6 @@ header {
   transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
 }
 
-#toggleSidebar:hover,
 #settingsBtn:hover {
   background: var(--soft-coral);
   transform: scale(1.1);
@@ -108,18 +99,10 @@ header {
 
 /* Container and content adjustments */
 .container {
-  display: flex;
-  margin-left: 250px;
   margin-top: 80px; /* Offset for header */
-  transition: margin-left var(--transition-speed) ease;
 }
 
-.container.sidebar-hidden {
-  margin-left: 0;
-}
-
-.content {
-  flex-grow: 1;
+.mainContent {
   padding: 2rem;
   background: var(--off-white);
   border-radius: 10px;
@@ -128,28 +111,85 @@ header {
   margin: 0 auto; /* Center the content */
 }
 
-/* Sidebar */
-.sidebar {
-  width: 250px;
-  padding: 1rem;
+.pastContent {
+  padding: 2rem;
   background: var(--off-white);
-  border-right: 1px solid var(--warm-brown);
-  height: 100vh;
-  overflow-y: auto;
-  position: fixed;
-  top: 0;
-  left: 0;
-  transition: transform var(--transition-speed) ease;
-  z-index: 900;
+  border-radius: 10px;
+  border: 1px solid var(--warm-brown);
+  max-width: 900px; /* Reduced max-width for smaller notes layout */
+  margin: 0 auto; /* Center the content */
+  margin-top: 2rem; /* Add space between sections */
 }
 
-.sidebar.sidebar-hidden {
-  transform: translateX(-100%);
+/* Previous notes section */
+.previous-notes {
+  margin-top: 2rem;
 }
 
-.sidebar h2 {
-  margin-top: 0;
+.previous-notes h2 {
   color: var(--warm-brown);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 280px); /* Reduced column width to 280px */
+  gap: 3rem; /* Keep the gap for spacing */
+  width: 100%; /* Match parent width */
+  max-width: 100%; /* Respect parent max-width */
+  justify-content: center; /* Center the grid items */
+}
+
+.note-item {
+  background: var(--off-white);
+  border: 1px solid var(--warm-brown);
+  border-radius: 10px;
+  padding: 0.5rem; /* Reduced padding to avoid pushing content */
+  aspect-ratio: 16 / 9; /* 16:9 ratio */
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%; /* Ensure it fits within the grid column */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow for better separation */
+}
+
+.note-item:hover {
+  background: var(--soft-coral);
+}
+
+.note-item h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: var(--warm-brown);
+}
+
+.note-item p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--gray-blue);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+}
+
+/* Responsive design for split screen */
+@media (max-width: 1000px) {
+  .notes-grid {
+    grid-template-columns: repeat(2, 280px); /* 2 columns on smaller screens */
+  }
+}
+
+@media (max-width: 700px) {
+  .notes-grid {
+    grid-template-columns: 280px; /* 1 column on very small screens */
+  }
 }
 
 /* Reload question button */
@@ -259,17 +299,6 @@ header {
 .login-container a:hover {
   color: var(--soft-coral);
   text-decoration: underline;
-}
-
-/* Entry display */
-.entry-display {
-  margin-top: 2rem;
-  padding: 1rem;
-  background: var(--cream-beige);
-  border-radius: 5px;
-  border: 1px solid var(--warm-brown);
-  white-space: pre-wrap;
-  overflow: auto;
 }
 
 /* Modal styles */
