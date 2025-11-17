@@ -2,57 +2,85 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Connexion - Mon Journal</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    @font-face {
+      font-family: 'Sacramento';
+      src: url('SacramentoRegular-X3LaG.ttf') format('truetype');
+    }
+  </style>
 </head>
 <body>
-  <div class="login-container">
-    <h2>Connexion</h2>
-    <input type="email" id="loginEmail" placeholder="Email" required>
-    <input type="password" id="loginPassword" placeholder="Mot de passe" required>
-    <button id="loginBtn">Se connecter</button>
-    <p>Pas de compte ? <a href="#" id="showRegister">S'inscrire</a></p>
-  </div>
-
-  <div class="login-container" style="display: none;">
-    <h2>Inscription</h2>
-    <input type="email" id="registerEmail" placeholder="Email" required>
-    <input type="password" id="registerPassword" placeholder="Mot de passe" required>
-    <button id="registerBtn">S'inscrire</button>
-    <p>Déjà un compte ? <a href="#" id="showLogin">Se connecter</a></p>
+  <div class="login-page">
+    <h1 id="site-title">Mon-Journal</h1>
+    <div class="login-form-wrapper">
+      <div class="login-container" id="loginForm">
+        <h2>Connexion</h2>
+        <input type="email" id="loginEmail" placeholder="Email" required>
+        <input type="password" id="loginPassword" placeholder="Mot de passe" required>
+        <div class="form-group" id="verificationCodeGroup" style="display: none;">
+          <label for="verificationCode">Code de vérification</label>
+          <input type="text" id="verificationCode" pattern="[0-9]{6}" maxlength="6">
+          <small>Un code de vérification a été envoyé à votre adresse email</small>
+        </div>
+        <button id="loginBtn">Se connecter</button>
+        <p>Pas de compte ? <a href="#" id="showRegister">S'inscrire</a></p>
+      </div>
+      <div class="login-container hidden" id="registerForm">
+        <h2>Inscription</h2>
+        <input type="email" id="registerEmail" placeholder="Email" required>
+        <input type="password" id="registerPassword" placeholder="Mot de passe" required>
+        <button id="registerBtn">S'inscrire</button>
+        <p>Déjà un compte ? <a href="#" id="showLogin">Se connecter</a></p>
+      </div>
+    </div>
   </div>
 
   <script>
     // Toggle between login and register forms
-    document.getElementById('showRegister').addEventListener('click', () => {
-      document.querySelectorAll('.login-container')[0].style.display = 'none';
-      document.querySelectorAll('.login-container')[1].style.display = 'block';
+    document.getElementById('showRegister').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('loginForm').classList.add('hidden');
+      document.getElementById('registerForm').classList.remove('hidden');
     });
 
-    document.getElementById('showLogin').addEventListener('click', () => {
-      document.querySelectorAll('.login-container')[0].style.display = 'block';
-      document.querySelectorAll('.login-container')[1].style.display = 'none';
+    document.getElementById('showLogin').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('registerForm').classList.add('hidden');
+      document.getElementById('loginForm').classList.remove('hidden');
     });
 
     // Login
     document.getElementById('loginBtn').addEventListener('click', async () => {
       const email = document.getElementById('loginEmail').value;
       const password = document.getElementById('loginPassword').value;
+      const verificationCode = document.getElementById('verificationCode').value;
 
-      const res = await fetch('/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
+      try {
+        const res = await fetch('/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, verificationCode: verificationCode ? verificationCode : undefined })
+        });
 
-      const data = await res.json();
-      if (data.token) {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('role', data.role);
-        localStorage.setItem('email', email);
-        window.location.href = 'index.html';
-      } else {
-        alert(data.error);
+        const data = await res.json();
+        if (res.status === 400 && data.error === 'Verification code required') {
+          verificationCodeGroup.style.display = 'block';
+          return;
+        }
+        if (res.ok) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('role', data.role);
+          localStorage.setItem('email', email);
+          window.location.href = 'index.html';
+        } else {
+          alert(data.error || 'Erreur de connexion');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Erreur de connexion');
       }
     });
 
@@ -61,18 +89,22 @@
       const email = document.getElementById('registerEmail').value;
       const password = document.getElementById('registerPassword').value;
 
-      const res = await fetch('/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
+      try {
+        const res = await fetch('/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
 
-      const data = await res.json();
-      if (data.success) {
-        alert('Inscription réussie ! Veuillez vous connecter.');
-        document.getElementById('showLogin').click();
-      } else {
-        alert(data.error);
+        const data = await res.json();
+        if (data.success) {
+          alert('Inscription réussie ! Veuillez vous connecter.');
+          document.getElementById('showLogin').click();
+        } else {
+          alert(data.error);
+        }
+      } catch (error) {
+        alert('Erreur d\'inscription. Veuillez réessayer.');
       }
     });
   </script>

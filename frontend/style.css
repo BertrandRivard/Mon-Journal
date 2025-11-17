@@ -243,57 +243,159 @@ header {
   background: var(--soft-coral);
 }
 
-/* Login form */
+/* Login page specific styles */
+.login-page {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--cream-beige);
+  padding: 0;
+  gap: 2rem;
+}
+
+.login-page #site-title {
+  font-family: 'Sacramento', cursive;
+  font-size: 4rem;
+  color: var(--warm-brown);
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: static;
+  z-index: 10;
+  transition: margin 0.3s;
+}
+
+.login-form-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
 .login-container {
   max-width: 400px;
-  margin: 50px auto;
-  padding: 2rem;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 0;
+  padding: 2.5rem;
   background: var(--off-white);
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--warm-brown);
+  transition: opacity 0.3s, visibility 0.3s, box-shadow var(--transition-speed) ease;
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+}
+
+.login-container.hidden {
+  display: none !important;
+}
+
+@media (min-width: 600px) {
+  .login-page {
+    /* flex-direction: column; inutile, déjà défini */
+    /* justify-content: center; déjà défini plus haut */
+  }
+  .login-form-wrapper {
+    margin-top: 0;
+  }
+  .login-page #site-title {
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .login-page #site-title {
+    font-size: 2.2rem;
+    margin-top: 2vh;
+    margin-bottom: 1rem;
+  }
+  .login-container {
+    max-width: 95vw;
+    padding: 1.2rem;
+    margin-top: 0.5rem;
+  }
 }
 
 .login-container h2 {
-  margin: 0 0 1rem;
+  margin: 0 0 1.5rem;
   text-align: center;
   color: var(--warm-brown);
+  font-size: 2rem;
+  font-weight: 600;
 }
 
 .login-container input {
   width: 100%;
-  padding: 0.8rem;
-  margin: 0.5rem 0;
-  border: 1px solid var(--warm-brown);
-  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 1rem 1.2rem;
+  margin: 0.8rem 0;
+  border: 2px solid var(--warm-brown);
+  border-radius: 8px;
   background: var(--off-white);
   color: var(--warm-brown);
+  font-size: 1rem;
+  transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  text-align: left;
+}
+
+.login-container input:focus {
+  outline: none;
+  border-color: var(--soft-coral);
+  box-shadow: 0 0 0 3px rgba(232, 154, 143, 0.2);
+}
+
+.login-container input::placeholder {
+  color: var(--gray-blue);
+  opacity: 0.7;
 }
 
 .login-container button {
   width: 100%;
-  padding: 0.8rem;
-  margin: 0.5rem 0;
+  padding: 1rem;
+  margin: 1.2rem 0;
   background: var(--gray-blue);
   color: var(--off-white);
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
 }
 
 .login-container button:hover {
   background: var(--soft-coral);
+  transform: translateY(-2px);
+}
+
+.login-container button:active {
+  transform: translateY(0);
 }
 
 .login-container p {
   text-align: center;
-  margin: 1rem 0 0;
+  margin: 1.5rem 0 0;
+  color: var(--warm-brown);
+  font-size: 1rem;
 }
 
 .login-container a {
-  color: var(--warm-brown);
+  color: var(--gray-blue);
   text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition-speed) ease;
 }
 
 .login-container a:hover {
@@ -327,17 +429,36 @@ header {
   background: var(--off-white);
   padding: 2rem;
   border-radius: 10px;
-  max-width: 500px;
+  max-width: 800px;
   width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   position: relative;
   transform: translateY(-50px);
   transition: transform var(--transition-speed) ease;
   border: 1px solid var(--warm-brown);
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-content.active {
   transform: translateY(0);
+}
+
+.modal-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 100;
+  border-bottom: 1px solid var(--warm-brown);
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding-left: 2rem;
+  padding-right: 2rem;
+  box-sizing: border-box;
 }
 
 .modal-content h2 {
@@ -347,9 +468,17 @@ header {
 }
 
 .modal-content h3 {
-  margin: 0 0 1rem;
+  margin: 0;
   font-size: 1rem;
   color: var(--gray-blue);
+}
+
+.modal-content div {
+  margin-top: 1rem;
+  line-height: 1.6;
+  padding: 0 0.5rem;
+  position: static !important;
+  z-index: auto !important;
 }
 
 .modal-content p {
@@ -376,4 +505,109 @@ header {
 
 .modal-content button.close-modal:hover {
   background: var(--soft-coral);
+}
+
+.search-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+#searchInput {
+  padding: 0.8rem;
+  border: 1px solid var(--warm-brown);
+  border-radius: 5px;
+  width: 60%;
+  background: var(--off-white);
+  color: var(--warm-brown);
+}
+
+#searchType {
+  padding: 0.8rem;
+  border: 1px solid var(--warm-brown);
+  border-radius: 5px;
+  background: var(--off-white);
+  color: var(--warm-brown);
+  cursor: pointer;
+}
+
+.load-more-btn {
+  display: block;
+  margin: 2rem auto;
+  padding: 10px 20px;
+  background: var(--gray-blue);
+  color: var(--off-white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.load-more-btn:hover {
+  background: var(--soft-coral);
+}
+
+body.modal-open {
+  overflow: hidden !important;
+}
+
+/* Edit and Save buttons in modal */
+.edit-btn,
+.save-btn {
+  padding: 8px 16px;
+  margin: 10px;
+  cursor: pointer;
+  background: var(--gray-blue);
+  color: var(--off-white);
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.edit-btn:hover,
+.save-btn:hover {
+  background: var(--soft-coral);
+}
+
+/* Modal editor styles */
+#modalEditorContainer {
+  margin: 1rem 0;
+  max-width: 100%;
+  background: var(--off-white);
+  border: 1px solid var(--warm-brown);
+  border-radius: 5px;
+  min-height: 400px;
+}
+
+#modalEditor {
+  height: 400px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+#modalEditor .ql-editor {
+  min-height: 400px;
+  max-height: 600px;
+  overflow-y: auto;
+  background: var(--off-white);
+  color: var(--warm-brown);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+#modalEditor .ql-toolbar {
+  background: var(--off-white);
+  border-bottom: 1px solid var(--warm-brown);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 8px;
+}
+
+/* Edit indicator in note grid */
+.note-item p span {
+  font-size: 1.2em;
+  vertical-align: middle;
 }

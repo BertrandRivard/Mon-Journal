@@ -34,7 +34,17 @@
       <!-- Section for previous notes -->
       <section class="previous-notes">
         <h2>Notes précédentes</h2>
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Rechercher par mot-clé, question ou date...">
+          <select id="searchType">
+            <option value="all">Tout</option>
+            <option value="keyword">Mot-clé</option>
+            <option value="question">Question</option>
+            <option value="date">Date</option>
+          </select>
+        </div>
         <div id="history" class="notes-grid"></div>
+        <button id="loadMoreBtn" class="load-more-btn">Charger plus</button>
       </section>
     </main>
   </div>
