@@ -10,19 +10,25 @@
   <style>
     @font-face {
       font-family: 'Sacramento';
-      src: url('SacramentoRegular-X3LaG.ttf') format('truetype');
+      src: url('assets/fonts/SacramentoRegular-X3LaG.ttf') format('truetype');
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1 id="site-title">Mon-Journal</h1>
-    <div class="header-buttons">
-      <button id="settingsBtn">⚙️</button>
+  <aside class="sidebar">
+    <div class="sidebar-content">
+      <h1 id="site-title" class="sidebar-title">Mon-Journal</h1>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-nav="home">
+          <img src="assets/images/logo_Mon-Journal.png" alt="Accueil" class="nav-icon">
+          <span class="nav-label">Accueil</span>
+        </a>
+      </nav>
+      <button id="settingsBtn" class="settings-btn-sidebar">⚙️</button>
     </div>
-  </header>
+  </aside>
 
-  <div class="container">
+  <div class="main-wrapper">
     <main class="mainContent">
       <h1 id="question">What's a new thing you learned recently?</h1>
       <button id="reloadQuestion">♻️</button>
