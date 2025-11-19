@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Discover - Mon Journal</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Load Sacramento font locally -->
+  <style>
+    @font-face {
+      font-family: 'Sacramento';
+      src: url('assets/fonts/SacramentoRegular-X3LaG.ttf') format('truetype');
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-content">
+      <h1 id="site-title" class="sidebar-title">Mon-Journal</h1>
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item" data-nav="home">
+          <img src="assets/images/logo_Mon-Journal.png" alt="Home" class="nav-icon">
+          <span class="nav-label">Home</span>
+        </a>
+        <a href="search.html" class="nav-item" data-nav="search">
+          <span class="nav-icon">🔍</span>
+          <span class="nav-label">Search</span>
+        </a>
+        <a href="discover.html" class="nav-item active" data-nav="discover">
+          <span class="nav-icon">🌍</span>
+          <span class="nav-label">Discover</span>
+        </a>
+        <a href="notifications.html" class="nav-item" data-nav="notifications">
+          <span class="nav-icon">🔔</span>
+          <span class="nav-label">Notifications</span>
+        </a>
+      </nav>
+      <button id="settingsBtn" class="settings-btn-sidebar">⚙️</button>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+    <main class="mainContent">
+      <h1>Discover</h1>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -20,8 +20,20 @@
       <h1 id="site-title" class="sidebar-title">Mon-Journal</h1>
       <nav class="sidebar-nav">
         <a href="#" class="nav-item active" data-nav="home">
-          <img src="assets/images/logo_Mon-Journal.png" alt="Accueil" class="nav-icon">
-          <span class="nav-label">Accueil</span>
+          <img src="assets/images/logo_Mon-Journal.png" alt="Home" class="nav-icon">
+          <span class="nav-label">Home</span>
+        </a>
+        <a href="search.html" class="nav-item" data-nav="search">
+          <span class="nav-icon">🔍</span>
+          <span class="nav-label">Search</span>
+        </a>
+        <a href="discover.html" class="nav-item" data-nav="discover">
+          <span class="nav-icon">🌍</span>
+          <span class="nav-label">Discover</span>
+        </a>
+        <a href="notifications.html" class="nav-item" data-nav="notifications">
+          <span class="nav-icon">🔔</span>
+          <span class="nav-label">Notifications</span>
         </a>
       </nav>
       <button id="settingsBtn" class="settings-btn-sidebar">⚙️</button>
@@ -34,23 +46,23 @@
       <button id="reloadQuestion">♻️</button>
       <!-- Quill editor with reduced height -->
       <div id="editor" style="height: 150px;"></div>
-      <button id="submitBtn">Envoyer</button>
+      <button id="submitBtn">Send</button>
     </main>
     <main class="pastcontent">
       <!-- Section for previous notes -->
       <section class="previous-notes">
-        <h2>Notes précédentes</h2>
+        <h2>Previous notes</h2>
         <div class="search-container">
-          <input type="text" id="searchInput" placeholder="Rechercher par mot-clé, question ou date...">
+          <input type="text" id="searchInput" placeholder="Search by keyword, question or date...">
           <select id="searchType">
-            <option value="all">Tout</option>
-            <option value="keyword">Mot-clé</option>
+            <option value="all">All</option>
+            <option value="keyword">Keyword</option>
             <option value="question">Question</option>
             <option value="date">Date</option>
           </select>
         </div>
         <div id="history" class="notes-grid"></div>
-        <button id="loadMoreBtn" class="load-more-btn">Charger plus</button>
+        <button id="loadMoreBtn" class="load-more-btn">Load more</button>
       </section>
     </main>
   </div>
