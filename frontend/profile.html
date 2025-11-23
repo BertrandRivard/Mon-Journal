@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Recherche - Mon Journal</title>
+  <title>Profile - Mon Journal</title>
   <link rel="stylesheet" href="style.css">
   <!-- Load Sacramento font locally -->
   <style>
@@ -21,7 +21,7 @@
           <img src="assets/images/logo_Mon-Journal.png" alt="Home" class="nav-icon">
           <span class="nav-label">Home</span>
         </a>
-        <a href="search.html" class="nav-item active" data-nav="search">
+        <a href="search.html" class="nav-item" data-nav="search">
           <span class="nav-icon">🔍</span>
           <span class="nav-label">Search</span>
         </a>
@@ -33,7 +33,7 @@
           <span class="nav-icon">🔔</span>
           <span class="nav-label">Notifications</span>
         </a>
-        <a href="profile.html" class="nav-item" data-nav="profile">
+        <a href="profile.html" class="nav-item active" data-nav="profile">
           <span class="nav-icon">👤</span>
           <span class="nav-label">Profile</span>
         </a>
@@ -44,7 +44,21 @@
 
   <div class="main-wrapper">
     <main class="mainContent">
-      <h1>Search</h1>
+      <h1>Profile</h1>
+      <div class="profile-section">
+        <div class="profile-item">
+          <label>Username:</label>
+          <p id="username">-</p>
+        </div>
+        <div class="profile-item">
+          <label>Email:</label>
+          <p id="email">-</p>
+        </div>
+        <div class="profile-item">
+          <label>Role:</label>
+          <p id="role">-</p>
+        </div>
+      </div>
     </main>
   </div>
 
